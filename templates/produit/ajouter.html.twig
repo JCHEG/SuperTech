@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Ajouter un produit dans la BDD{% endblock %}
+
+{% block body %}
+    <h1>Ajouter un produit dans la BDD</h1>
+
+    {#form(form)#}
+    {{ form_start(formProduit) }}
+    {{ form_row(formProduit.prixHT{'attr' : {'type' : "number"}}) }}{#Ligne traitée particulierement a laquelle on peut appliquer du css#}
+    {{ form_widget(formProduit) }}
+    {{ form_end(formProduit) }}
+
+{% endblock %}

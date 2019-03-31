@@ -1,0 +1,23 @@
+<!-- Categories Menu -->
+
+
+    <ul class="cat_menu">
+    {% for cat in listCat %}
+        <li class="hassubs">
+            <a href="{{ path('produitsParCat', { 'idCat' : cat.id}) }}">{{ cat.nom }}<i class="fas fa-chevron-right"></i></a>
+            <ul>
+            {% for scat in cat.sousCategories %}
+
+                <li class="hassubs">
+                    <a href="{{ path('produitsParCat', { 'idCat' : scat.id}) }}">{{ scat.nom }}<i class="fas fa-chevron-right"></i></a>
+                    <ul>
+            {% for sscat in scat.sousCategories %}
+                    <li><a href="{{ path('produitsParCat', { 'idCat' : sscat.id}) }}">{{ sscat.nom }}<i class="fas fa-chevron-right"></i></a></li>
+            {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+    </ul>

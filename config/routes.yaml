@@ -1,0 +1,3 @@
+accueil:
+    path: /
+    controller: App\Controller\BoutiqueController::index
