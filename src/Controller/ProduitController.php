@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Form\ProduitFormType;
+use App\Form\ProduitType;
 use App\Repository\ProduitRepository;
 use App\Repository\CategorieRepository;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -29,7 +29,7 @@ class ProduitController extends AbstractController
     }
 
     /**
-     * @Route("/produits{idCat}", name="produitsParCat")
+     * @Route("/produits-{idCat}", name="produitsParCat")
      */
     public function produits(ProduitRepository $repository, CategorieRepository $categorieRepository, ObjectManager $manager, Request $request, PaginatorInterface $paginator, $idCat)
     {
@@ -47,32 +47,6 @@ class ProduitController extends AbstractController
 
         return $this->render('produit/index.html.twig', [
             'listProd' => $listProd,
-        ]);
-    }
-
-    /**
-     * @Route("/produit/ajouter", name="produit.ajouter")
-     */
-    public function ajouterProduit(Request $request, ObjectManager $manager)
-    {
-        $produit = new Produit();
-        $produit->setLibelle('Iphone 10');
-        $produit->setPrixTTC(500);
-        $form = $this->createForm(ProduitFormType::class, $produit);
-        $form->handleRequest($produit);
-        if($form->isSubmitted() && $form->isValid()){
-            $manager->persist($produit);
-            $manager->flush();
-
-        }
-        dump($produit);//afficher dans le debegur tout à droite
-
-
-
-
-
-        return $this->render('produit/ajouter.html.twig', [
-            'formProduit' => $form->createView(),
         ]);
     }
 }

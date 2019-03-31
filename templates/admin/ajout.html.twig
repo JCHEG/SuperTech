@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+{% form_theme formProduit 'bootstrap_4_layout.html.twig' %}
+
+{% block ss %}
+    <link rel="stylesheet" type="text/css" href="styles/contact_styles.css">
+    <link rel="stylesheet" type="text/css" href="styles/contact_responsive.css">
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="mt-4">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1">
+                    <h1>Modifier un produit</h1>
+
+                    {{ form_start(formProduit, { 'attr': {'id': 'contact_form'} }) }}
+
+                    {{ form_errors(formProduit) }}
+
+                    <div class="form-group">
+                        {{  form_row(formProduit.libelle, {'attr' : {'placeholder':'Désignation', 'type':"text",
+                            'class':'form-control', 'required': 'true'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{  form_row(formProduit.prixHT, {'attr' : {'placeholder':'Prix HT', 'type':"text",
+                            'class':'form-control', 'required': 'true'}}) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{  form_row(formProduit.prixAchat, {'attr' : {'placeholder':"Prix d'achat", 'type':"text",
+                            'class':'form-control', 'required': 'true'}}) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{  form_row(formProduit.description, {'attr' : {'placeholder':'Description', 'type':"textarea",
+                            'class':'form-control', 'required': 'true'}}) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{  form_row(formProduit.categorie, {'attr' : {'type':"select", 'class':'form-control'}}) }}
+                    </div>
+                    <div class="form-check form-check-inline">
+                        {{  form_row(formProduit.enVente, {'attr' : {'type':"checkbox", 'class':'form-check-input', 'id':'inlineCheckbox1'}}) }}
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        {{  form_row(formProduit.enSolde, {'attr' : {'type':"checkbox", 'class':'form-check-input', 'id':'inlineCheckbox2'}}) }}
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        {{  form_row(formProduit.enAvant, {'attr' : {'type':"checkbox", 'class':'form-check-input', 'id':'inlineCheckbox3'}}) }}
+                    </div>
+
+
+                    <div class="form-group">
+                        {{  form_row(formProduit.codeBarre,  {'attr' : {'placeholder':'Code Barre', 'type':"text",
+                            'class':'form-control', 'required': 'true'}}) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{  form_row(formProduit.codeFournisseur,  {'attr' : {'placeholder':'Code fournisseur', 'type':"text",
+                            'class':'form-control', 'required': 'true'}}) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{  form_row(formProduit.taille,  {'attr' : {'placeholder':'Taille', 'type':"text",
+                            'class':'form-control', 'required': 'true'}}) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{  form_row(formProduit.conditionnement,  {'attr' : {'placeholder':'Conditionnement', 'type':"text",
+                            'class':'form-control', 'required': 'true'}}) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{  form_row(formProduit.tva, {'attr' : {'placeholder':'TVA', 'type':"text",
+                            'class':'form-control', 'required': 'true'}}) }}
+                    </div>
+
+
+                    <button type="submit" class="button contact_submit_button">Valider les modifications</button>
+
+
+                    {{ form_end(formProduit) }}
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

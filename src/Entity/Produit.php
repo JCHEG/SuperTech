@@ -32,11 +32,6 @@ class Produit
     private $prixHT;
 
     /**
-     * (name="prixTTC", type="decimal", precision=7, scale=2)
-     */
-    private $prixTTC;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $enSolde;
@@ -55,7 +50,7 @@ class Produit
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $codebarre;
+    private $codeBarre;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -88,7 +83,7 @@ class Produit
     private $enVente;
 
     /**
-     * @ORM\OneToMany(targetEntity="Image", mappedBy="produit", cascade={"persist","remove"})
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="produit", cascade={"persist","remove", "refresh"})
      */
     private $images;
 
@@ -98,6 +93,7 @@ class Produit
     public function __construct()
     {
         $this->images = new \Doctrine\Common\Collections\ArrayCollection();
+        //$this->categorie = new Categorie();
     }
 
     public function getId(): ?int
@@ -180,14 +176,7 @@ class Produit
 
     public function getPrixTTC(): ?int
     {
-        return $this->prixTTC;
-    }
-
-    public function setPrixTTC(int $prixTTC): self
-    {
-        $this->prixTTC = $prixTTC;
-
-        return $this;
+        return $this->prixHT * (1 + $this->tva);
     }
 
     public function getEnSolde(): ?bool
@@ -226,14 +215,14 @@ class Produit
         return $this;
     }
 
-    public function getCodebarre(): ?string
+    public function getCodeBarre(): ?string
     {
-        return $this->codebarre;
+        return $this->codeBarre;
     }
 
-    public function setCodebarre(string $codebarre): self
+    public function setCodeBarre(string $codeBarre): self
     {
-        $this->codebarre = $codebarre;
+        $this->codeBarre = $codeBarre;
 
         return $this;
     }
@@ -308,5 +297,13 @@ class Produit
         $this->enVente = $enVente;
 
         return $this;
+    }
+
+    /**
+     * @return nom
+     */
+    public function __toString(): string
+    {
+        return $this->libelle;
     }
 }
