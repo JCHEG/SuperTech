@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil Admin {% endblock %}
+{% block title %}List Produits {% endblock %}
 
 {% block ss %}
     <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
@@ -15,71 +15,16 @@
 
 
 <div class="container mt-5">
-        <div class="row">
-            <div class="col-lg-offset-2 col-lg-12">
-    <div class="pull-left"><h1>Liste de tous les produits</h1></div>
-    <div class="pull-right"><a href="{{ path('admin.produit.ajout') }}"><button type="button" class="btn btn-primary">Ajouter un produit</button></a></div>
-            </div></div></div>
-<div class="shop">
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-lg-offset-2 col-lg-12">
-                <div class="shop_bar clearfix">
-                    <div class="shop_product_count">{{ knp_pagination_render(listProd) }}</div>
-                    <div class="shop_sorting">
-                        <span>Filtrer par :</span>
-                        <ul>
-                            <li>
-                                <span class="sorting_text">Top vente<i class="fas fa-chevron-down"></i></span>
-                                <ul>
-                                    <li class="shop_sorting_button" data-isotope-option='{ "sortBy": "original-order" }'>Top vente</li>
-                                    <li class="shop_sorting_button" data-isotope-option='{ "sortBy": "name" }'>{{ knp_pagination_sortable(listProd, 'Désignation', 'p.libelle') }}</li>
-                                    <li class="shop_sorting_button"data-isotope-option='{ "sortBy": "price" }'>{{ knp_pagination_sortable(listProd, 'Prix', 'p.prixHT') }}</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-            <table class="table">
-                <thead class="thead-light">
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Designation</th>
-                    <th scope="col">Prix HT</th>
-                    <th scope="col">Modifier</th>
-                    <th scope="col">Supprimer</th>
-                </tr>
-                </thead>
-                <tbody>
-            {% for produit in listProd %}
-                    <tr>
-                        <th class="align-middle" scope="row">{{ produit.id }}</th>
-                        <td class="align-middle">{{ produit.libelle }}</td>
-                        <td class="align-middle">{{ produit.prixHT }}</td>
-                        <td class="align-middle"><a href="{{ path('admin.produit.modif', {id : produit.id}) }}"><button type="button" class="btn btn-warning">Modifier</button></a></td>
-                        <td class="align-middle"><a href="{{ path('admin.produit.supprimer', {id : produit.id}) }}"><button type="button" class="btn btn-danger">Supprimer</button></a></td>
-                    </tr>
-            {% endfor %}
-                </tbody>
-            </table>
-                <div class="shop_bar clearfix">
-                    <div class="shop_product_count">{{ knp_pagination_render(listProd) }}</div>
-                    <div class="shop_sorting">
-                        <span>Filtrer par :</span>
-                        <ul>
-                            <li>
-                                <span class="sorting_text">Top vente<i class="fas fa-chevron-down"></i></span>
-                                <ul>
-                                    <li class="shop_sorting_button" data-isotope-option='{ "sortBy": "original-order" }'>Top vente</li>
-                                    <li class="shop_sorting_button" data-isotope-option='{ "sortBy": "name" }'>{{ knp_pagination_sortable(listProd, 'Désignation', 'p.libelle') }}</li>
-                                    <li class="shop_sorting_button"data-isotope-option='{ "sortBy": "price" }'>{{ knp_pagination_sortable(listProd, 'Prix', 'p.prixHT') }}</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <div class="row">
+        <div class="col-lg-offset-2 col-lg-12">
+            <p>
+            <h1>Lister les produits</h1>
+            <div class="pull-left"><a href="{{ path('admin.produit') }}"><button type="button" class="btn btn-primary">Liste produits</button></a></div>
+            </p>
+            <p>
+            <h1>Lister les utilisateurs</h1>
+            <div class="fa-pull-left"><a href="{{ path('admin.users') }}"><button type="button" class="btn btn-primary">Liste Utilisateur</button></a></div>
+            </p>
         </div>
     </div>
 </div>

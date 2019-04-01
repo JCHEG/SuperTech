@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List Produits {% endblock %}
+
+{% block ss %}
+    <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
+    <link rel="stylesheet" type="text/css" href="plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="styles/shop_styles.css">
+    <link rel="stylesheet" type="text/css" href="styles/shop_responsive.css">
+{% endblock %}
+
+{% block body %}
+
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-offset-2 col-lg-12">
+                <div class="pull-left"><h1>Liste de tous les produits</h1></div>
+                <div class="pull-right"><a href="{{ path('app_register') }}"><button type="button" class="btn btn-primary">Ajouter un utilisateur</button></a></div>
+            </div></div></div>
+    <div class="shop">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-offset-2 col-lg-12">
+                    <div class="shop_bar clearfix">
+                        <div class="shop_product_count">{{ knp_pagination_render(listUser) }}</div>
+                        <div class="shop_sorting">
+                            <span>Filtrer par :</span>
+                            <ul>
+                                <li>
+                                    <span class="sorting_text">Top vente<i class="fas fa-chevron-down"></i></span>
+                                    <ul>
+                                        <li class="shop_sorting_button" data-isotope-option='{ "sortBy": "original-order" }'>Filtrer</li>
+                                        <li class="shop_sorting_button" data-isotope-option='{ "sortBy": "name" }'>{{ knp_pagination_sortable(listUser, 'Nom', 'u.nom') }}</li>
+                                        <li class="shop_sorting_button"data-isotope-option='{ "sortBy": "price" }'>{{ knp_pagination_sortable(listUser, 'Prénom', 'u.prenom') }}</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <table class="table">
+                        <thead class="thead-light">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Prénom</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Téléphone</th>
+                            <th scope="col">Modifier</th>
+                            <th scope="col">Supprimer</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in listUser %}
+                            <tr>
+                                <th class="align-middle" scope="row">{{ user.id }}</th>
+                                <td class="align-middle">{{ user.nom }}</td>
+                                <td class="align-middle">{{ user.prenom }}</td>
+                                <td class="align-middle">{{ user.email }}</td>
+                                <td class="align-middle">{{ user.tel }}</td>
+                                <td class="align-middle"><a href="{{ path('admin.user.modif', {id : user.id}) }}"><button type="button" class="btn btn-warning">Modifier</button></a></td>
+                                <td class="align-middle"><a href="{{ path('admin.user.supprimer', {id : user.id}) }}"><button type="button" class="btn btn-danger">Supprimer</button></a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="shop_bar clearfix">
+                        <div class="shop_product_count">{{ knp_pagination_render(listUser) }}</div>
+                        <div class="shop_sorting">
+                            <span>Filtrer par :</span>
+                            <ul>
+                                <li>
+                                    <span class="sorting_text">Top vente<i class="fas fa-chevron-down"></i></span>
+                                    <ul>
+                                        <li class="shop_sorting_button" data-isotope-option='{ "sortBy": "original-order" }'>Top vente</li>
+                                        <li class="shop_sorting_button" data-isotope-option='{ "sortBy": "name" }'>{{ knp_pagination_sortable(listUser, 'Nom', 'u.nom') }}</li>
+                                        <li class="shop_sorting_button"data-isotope-option='{ "sortBy": "price" }'>{{ knp_pagination_sortable(listUser, 'Prénom', 'u.prenom') }}</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block js %}
+    <script src="plugins/Isotope/isotope.pkgd.min.js"></script>
+    <script src="plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+    <script src="plugins/parallax-js-master/parallax.min.js"></script>
+    <script src="js/shop_custom.js"></script>
+{% endblock %}

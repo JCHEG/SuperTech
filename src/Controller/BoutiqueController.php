@@ -14,11 +14,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use App\Repository\ProduitRepository;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Routing\Annotation\Route;
 
 
 class BoutiqueController extends AbstractController
 {
-
+    /**
+     * @Route("/Accueil", name="accueil")
+     */
     public function index(): Response
     {
         $x = random_int(10,20);

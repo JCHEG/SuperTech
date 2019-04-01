@@ -3,15 +3,24 @@
 namespace App\DataFixtures;
 
 use App\Entity\Image;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\Produit;
 use App\Entity\Categorie;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 class AppFixtures extends Fixture
 {
+     private $passwordEncoder;
+
+     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+     {
+         $this->passwordEncoder = $passwordEncoder;
+     }
+
     public function load(ObjectManager $manager)
     {
         $faker = \Faker\Factory::create();
@@ -26,7 +35,7 @@ class AppFixtures extends Fixture
             $cat = new Categorie();
             $cat->setNom('Catégorie ' . $faker->word)
                 ->setDescription('Catégorie ' . $faker->text)
-                ->setOrdre($i)
+                ->setNiveau($i)
                 ->setCategorie($cat);
 
             $manager->persist($cat);
@@ -40,7 +49,7 @@ class AppFixtures extends Fixture
             $cat = new Categorie();
             $cat->setNom('Sous Catégorie ' . $faker->word)
                 ->setDescription('Sous Catégorie ' . $faker->text)
-                ->setOrdre($i)
+                ->setNiveau($i)
                 ->setCategorie($catNiv1->get($j));
 
             $manager->persist($cat);
@@ -55,7 +64,7 @@ class AppFixtures extends Fixture
             $cat = new Categorie();
             $cat->setNom('Sous Sous Catégorie ' . $faker->word)
                 ->setDescription('Sous Sous Catégorie ' . $faker->text)
-                ->setOrdre($i)
+                ->setNiveau($i)
                 ->setCategorie($catNiv2->get($j));
 
             $manager->persist($cat);
@@ -78,7 +87,6 @@ class AppFixtures extends Fixture
                 ->setEnVente(true)
                 ->setPrixAchat($faker->randomDigit)
                 ->setPrixHT($faker->randomDigit)
-                ->setPrixTTC($faker->randomDigit)
                 ->setTaille($faker->randomLetter)
                 ->setTva(0.2)
                 ->setCategorie($catNiv3->get($j));
@@ -93,6 +101,35 @@ class AppFixtures extends Fixture
 
             $manager->persist($produit);
             $j++;
+        }
+
+        $user = new User();
+        $user->setPassword($this->passwordEncoder->encodePassword(
+                 $user,
+                '132456'))
+            ->setNom($faker->name)
+            ->setPrenom($faker->firstName)
+            ->setAdresse($faker->address)
+            ->setCodePostal($faker->postcode)
+            ->setEmail('email@gamil.com')
+            ->setTel($faker->phoneNumber)
+        ;
+        $manager->persist($user);
+
+        for($i = 0 ; $i < 30 ; $i++)
+        {
+            $user = new User();
+            $user->setPassword($this->passwordEncoder->encodePassword(
+                $user,
+                '132456'))
+                ->setNom($faker->name)
+                ->setPrenom($faker->firstName)
+                ->setAdresse($faker->address)
+                ->setCodePostal($faker->postcode)
+                ->setEmail($faker->email)
+                ->setTel($faker->phoneNumber)
+            ;
+            $manager->persist($user);
         }
 
         $manager->flush();

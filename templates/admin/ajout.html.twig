@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{% form_theme formProduit 'bootstrap_3_layout.html.twig' %}
+{% form_theme formProduit 'bootstrap_4_layout.html.twig' %}
 
 {% block ss %}
     <link rel="stylesheet" type="text/css" href="styles/contact_styles.css">
@@ -17,7 +17,7 @@
                     <div class="mt-4">
                         {{ form_start(formProduit) }}
                         {{ form_widget(formProduit) }}
-                        <button class="btn btn-success" type="submit">Créer un nouveau produit</button>
+                        <button class="btn btn-primary" type="submit">Créer un nouveau produit</button>
                         {{ form_end(formProduit) }}
 
 
