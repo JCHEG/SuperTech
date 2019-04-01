@@ -68,7 +68,7 @@ class Produit
     private $conditionnement;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="decimal", precision=7, scale=2)
      */
     private $prixAchat;
 

@@ -37,13 +37,15 @@ class AdminController extends AbstractController
     {
         $produit = $produitRepository->findOneBy(['id' => $id]);
         $form = $this->createForm(ProduitType::class, $produit);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
-            $manager->persist($produit);
-            $manager->flush();
+        if($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $manager->persist($produit);
+                $manager->flush();
+                return $this->redirectToRoute("admin");
+            }
+            //dump($produit);//afficher dans le debugger tout à droite
         }
-        //dump($produit);//afficher dans le debugger tout à droite
-
         return $this->render('admin/modif.html.twig', [
             'produit' => $produit,
             'formProduit' => $form->createView(),
@@ -57,16 +59,32 @@ class AdminController extends AbstractController
     {
         $produit = new Produit();
         $form = $this->createForm(ProduitType::class);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
-            $manager->persist($produit);
-            $manager->flush();
-            return $this->redirectToRoute("produits");
+
+        if($request->isMethod('POST')){
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid()){
+                $manager->persist($produit);
+                $manager->flush();
+                return $this->redirectToRoute("admin");
+            }
+            dump($produit);//afficher dans le debugger tout à droite
         }
-        dump($produit);//afficher dans le debugger tout à droite
+
 
         return $this->render('admin/ajout.html.twig', [
             'formProduit' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/admin-produit-supprimer-{id}", name="admin.produit.supprimer")
+     */
+    public function supprimerProduit(ObjectManager $manager, ProduitRepository $produitRepository  , $id)
+    {
+        $produit = $produitRepository->find($id);
+        $manager->remove($produit);
+        $manager->flush();
+
+        return $this->redirectToRoute("admin");
     }
 }
