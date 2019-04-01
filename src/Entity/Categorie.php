@@ -29,7 +29,7 @@ class Categorie
     /**
      * @ORM\Column(type="integer")
      */
-    private $ordre;
+    private $niveau;
 
     /**
      * @ORM\OneToMany(targetEntity="Categorie", mappedBy="categorie")
@@ -81,14 +81,14 @@ class Categorie
         return $this;
     }
 
-    public function getOrdre(): ?int
+    public function getNiveau(): ?int
     {
-        return $this->ordre;
+        return $this->niveau;
     }
 
-    public function setOrdre(int $ordre): self
+    public function setNiveau(int $niveau): self
     {
-        $this->ordre = $ordre;
+        $this->niveau = $niveau;
 
         return $this;
     }

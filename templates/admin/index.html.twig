@@ -46,7 +46,7 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Designation</th>
-                    <th scope="col">Image</th>
+                    <th scope="col">Prix HT</th>
                     <th scope="col">Modifier</th>
                     <th scope="col">Supprimer</th>
                 </tr>
@@ -56,9 +56,9 @@
                     <tr>
                         <th class="align-middle" scope="row">{{ produit.id }}</th>
                         <td class="align-middle">{{ produit.libelle }}</td>
-                        <td class="align-middle"><img src="{{ produit.images[1].url }}" alt="{{ produit.images[1].alt }}"></td>
+                        <td class="align-middle">{{ produit.prixHT }}</td>
                         <td class="align-middle"><a href="{{ path('admin.produit.modif', {id : produit.id}) }}"><button type="button" class="btn btn-warning">Modifier</button></a></td>
-                        <td class="align-middle"><a href="#"><button type="button" class="btn btn-danger">Supprimer</button></a></td>
+                        <td class="align-middle"><a href="{{ path('admin.produit.supprimer', {id : produit.id}) }}"><button type="button" class="btn btn-danger">Supprimer</button></a></td>
                     </tr>
             {% endfor %}
                 </tbody>

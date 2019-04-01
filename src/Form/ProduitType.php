@@ -18,8 +18,10 @@ class ProduitType extends AbstractType
             ->add('libelle')
             ->add('description')
             ->add('prixHT')
-            ->add('categorie', EntityType::class,
-                ['class' => Categorie::Class])
+            ->add('categorie',EntityType::class, array(
+                'class'        => 'App\Entity\Categorie',
+                'choice_label' => 'nom',
+            ))
             ->add('codeBarre')
             ->add('codeFournisseur')
             ->add('taille')
